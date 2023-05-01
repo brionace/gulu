@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+model Post {
+  id  Int @id @default(autoincrement())
+  title String
+  excerpt String?
+  content String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  images  Image[]
+  author  String
+  authorEmail String
+  categories  Category[]
+  tags  String[]
+
+  @@unique([authorEmail, title])
+} 
+
+model Page {
+  id  Int @id @default(autoincrement())
+  slug String @unique
+  name String
+  description String?
+  content String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  images  Image[]
+  additionalFields Json?
+  showInNav Boolean @default(false)
+  navPosition Int @default(0)
+
+  @@unique([name])
+} 
+
+model Image {
+  id  Int @id @default(autoincrement())
+  post  Post?  @relation(fields: [postId], references: [id])
+  postId  Int?
+  page  Page?  @relation(fields: [pageId], references: [id])
+  pageId  Int?
+  name  String @unique
+  caption String?
+}
+
+model Category {
+  id  Int @id @default(autoincrement())
+  name  String @db.VarChar(50)
+  posts Post[]
+
+  @@unique([name])
+}

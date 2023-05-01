@@ -1,0 +1,17 @@
+-- CreateTable
+CREATE TABLE "Work" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "created" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated" DATETIME NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'DRAFT'
+);
+
+-- CreateTable
+CREATE TABLE "Image" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "workId" INTEGER NOT NULL,
+    "Caption" TEXT NOT NULL,
+    CONSTRAINT "Image_workId_fkey" FOREIGN KEY ("workId") REFERENCES "Work" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
