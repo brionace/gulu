@@ -119,8 +119,10 @@ export async function getServerSideProps() {
   }
 
   return {
-    work: { work: JSON.parse(JSON.stringify(work)) },
-    page: { work: JSON.parse(JSON.stringify(page)) },
-    menu: { work: JSON.parse(JSON.stringify(menu)) },
+    props: {
+      work: [...JSON.parse(JSON.stringify(work))],
+      page: { ...JSON.parse(JSON.stringify(page)) },
+      menu: [...JSON.parse(JSON.stringify(menu))],
+    },
   };
 }
