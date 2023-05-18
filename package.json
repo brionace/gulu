@@ -17,7 +17,7 @@
     "@emotion/styled": "^11.10.6",
     "@next/font": "^13.3.0",
     "@paralleldrive/cuid2": "^2.2.0",
-    "@prisma/client": "^4.13.0",
+    "@prisma/client": "^4.14.1",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",
     "chakra-ui": "^0.3.9",
@@ -27,7 +27,6 @@
     "next": "^13.4.2",
     "nodemailer": "^6.9.1",
     "pnpm": "^8.2.0",
-    "prisma": "^4.13.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
@@ -39,6 +38,7 @@
     "@types/node": "^18.15.11",
     "eslint": "^8.39.0",
     "eslint-config-next": "^13.3.1",
+    "prisma": "^4.14.1",
     "typescript": "^5.0.4"
   }
 }
