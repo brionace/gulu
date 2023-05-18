@@ -111,6 +111,13 @@ export async function getServerSideProps() {
       slug: true,
     },
   });
+
+  if (!page) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     work: { work: JSON.parse(JSON.stringify(work)) },
     page: { work: JSON.parse(JSON.stringify(page)) },

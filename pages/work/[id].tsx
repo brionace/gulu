@@ -8,20 +8,18 @@ import PageHead from "../../components/page-head";
 const prisma = new PrismaClient();
 
 interface SingleWork {
-  title: string;
-  excerpt: string;
-  content: string;
-  images?: { id: number; name: string; caption?: string }[];
+  work: {
+    title: string;
+    excerpt: string;
+    content: string;
+    images?: { id: number; name: string; caption?: string }[];
+  };
   menu: IPageHeader["menu"];
 }
 
-export default function Index({
-  title,
-  excerpt,
-  content,
-  images,
-  menu,
-}: SingleWork) {
+export default function Index({ work, menu }: SingleWork) {
+  const { title, excerpt, content, images } = work;
+
   return (
     <>
       <PageHead>
@@ -110,13 +108,19 @@ export async function getServerSideProps(context: any) {
       slug: true,
     },
   });
+
+  console.log(id, work);
+
   if (!work) {
     return {
       notFound: true,
     };
   }
+
   return {
-    props: { ...JSON.parse(JSON.stringify(work)) },
-    menu: { ...JSON.parse(JSON.stringify(menu)) },
+    // props: { ...JSON.parse(JSON.stringify(work)) },
+    // menu: { ...JSON.parse(JSON.stringify(menu)) },
+    work: { work: JSON.parse(JSON.stringify(work)) },
+    menu: { menu: JSON.parse(JSON.stringify(menu)) },
   };
 }
